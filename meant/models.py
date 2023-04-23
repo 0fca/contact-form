@@ -1,0 +1,44 @@
+import uuid
+from django.db import models
+from django.core.validators import MinLengthValidator
+from django.utils.translation import gettext_lazy as _
+
+# Create your models here.
+class Contact(models.Model):
+
+    """
+    There is many ways to do this I've just chosen two diffrent ones.
+    Alternatives are
+
+        - Enums
+        - django-model-utils
+        
+    """
+    
+    APP = 'app support'
+    PAY = 'payment support'
+    HR = 'HR/Jobs'
+    OTHER = 'other'
+    SUBJECT = [
+        (APP, _('App Support')),
+        (PAY, _('Payment Support')),
+        (HR, _('HR & Jobs')),
+        (OTHER, _('Non related (Other)'))
+    ]
+
+    STATUS = (
+       ('New', _('New')),
+       ('In Progres', _('In Progres - somone is taking an action')),
+       ('Resolved', _('Resolved - action was made')),
+   )
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    name = models.CharField(blank=False, max_length=50, validators=[MinLengthValidator(4)])
+    email = models.EmailField(max_length=55, blank=False, db_index=True)
+    subject = models.CharField(choices=SUBJECT, max_length=15, blank=False)
+    message = models.TextField(max_length=500, blank=False)
+    status = models.CharField(choices=STATUS, max_length=15, default=STATUS[0][0])
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return str(f'{self.subject} is {self.status}')
