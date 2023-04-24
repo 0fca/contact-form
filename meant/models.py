@@ -15,9 +15,9 @@ class Contact(models.Model):
         
     """
     
-    APP = 'app support'
-    PAY = 'payment support'
-    HR = 'HR/Jobs'
+    APP = 'app'
+    PAY = 'payment'
+    HR = 'hr'
     OTHER = 'other'
     SUBJECT = [
         (APP, _('App Support')),
@@ -27,9 +27,9 @@ class Contact(models.Model):
     ]
 
     STATUS = (
-       ('New', _('New')),
-       ('In Progres', _('In Progres - somone is taking an action')),
-       ('Resolved', _('Resolved - action was made')),
+       ('new', _('New')),
+       ('progres', _('In Progres - somone is taking an action')),
+       ('resolved', _('Resolved - action was made')),
    )
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(blank=False, max_length=50, validators=[MinLengthValidator(4)])

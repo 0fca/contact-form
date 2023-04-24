@@ -1,19 +1,16 @@
 from django.shortcuts import render, redirect
-from .models import Contact
-from rest_framework.renderers import TemplateHTMLRenderer
+
 from rest_framework.response import Response
-from rest_framework.views import APIView
-from .serializers import ContactSerializer
 from rest_framework import status, viewsets
+
+from .models import Contact
 from .permissions import AdminOnly
 from .filters import ContactMessageFilter
-
+from .pagination import ContactMessagePaginator
+from .serializers import ContactMessageSerializer
 
 """
-Just to be cohesive we can do that like we are doing contact form
-but this is 6 lines of code and we can do that in two
-
-In production this is the thing we can discuss what the team prefers 
+Just to be cohesive we can render it like that like that or in classic CBV
 """
 # class LandingAPIView(APIView):
 #     renderer_classes = [TemplateHTMLRenderer]
@@ -50,25 +47,28 @@ Second.
 
 def contact_form(request):
 
-    serializer = ContactSerializer()
+    serializer = ContactMessageSerializer()
     context = {
         'serializer': serializer
     }
 
     return render(request, 'meant/contact.html', context)
 
+
 """
-In other situation I would create file/app for api functions
+In other situation I would create separate file/app for api functions
 """
 
 class MessageViewSet(viewsets.ModelViewSet):
     permission_classes = (AdminOnly,)
     queryset = Contact.objects.all()
-    serializer_class = ContactSerializer
+    pagination_class = ContactMessagePaginator
+    serializer_class = ContactMessageSerializer
     filterset_class  = ContactMessageFilter
 
+    #if you want partial update just use patch request
     def create(self, request):
-        serializer = ContactSerializer(data=request.data)
+        serializer = ContactMessageSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
