@@ -47,6 +47,7 @@ class MessageViewSetTest(APITestCase):
         response_admin = self.admin_user.post(reverse('message-list'), self.message_dummy)
   
         self.assertEqual(response_base.status_code, 201)
+        # Should be separated or generified - cases for admin and for base user
         self.assertEqual(response_admin.status_code, 201)
         self.assertEqual(response_admin.data['name'], self.message_dummy['name'])
 
@@ -56,7 +57,7 @@ class MessageViewSetTest(APITestCase):
 
         response_base = self.base_user.post(reverse('message-list'), self.message_dummy)
         response_admin = self.admin_user.post(reverse('message-list'), self.message_dummy)
-
+        # Should be separated or generified - cases for admin and for base user
         self.assertEqual(response_base.status_code, 400)
         self.assertEqual(response_admin.status_code, 400)
         
