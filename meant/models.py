@@ -39,6 +39,9 @@ class Contact(models.Model):
     status = models.CharField(choices=STATUS, max_length=15, default=STATUS[0][0])
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-
+    
+    class Meta:
+        ordering = ['-created']
+        
     def __str__(self):
         return str(f'{self.subject} is {self.status}')

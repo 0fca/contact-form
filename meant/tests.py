@@ -62,9 +62,9 @@ class MessageViewSetTest(APITestCase):
         
 
     """
-        We can test serializers to but in this case I don't think thats nessesary 
-        becouse we are doing full request-response cycle
-        Regardles of that here is one for fun
+    We can test serializers to but in this case I don't think that's necessary
+    because we are doing full request-response cycle
+    Regardles of that here is one for fun
     """
 
     def test_email_valid(self):

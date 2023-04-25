@@ -32,11 +32,11 @@ def login(request):
 
 
 """
-I've used serializers as forms here 
+I've used serializers with inputs overrides as forms here 
 We can do this in other ways.
 
 First.
-    Django forms 
+    Django forms with attrs={'class':'class_name'}
 Second.
     Custom forms in some frontend framework. 
     This is the most typicall solution, where you only posting data to
