@@ -59,6 +59,7 @@ def contact_form(request):
 """
 In other situation I would create separate file/app for api functions
 """
+# "In other situation" - what situation?
 
 class MessageViewSet(viewsets.ModelViewSet):
     permission_classes = (AdminOnly,)
@@ -68,6 +69,7 @@ class MessageViewSet(viewsets.ModelViewSet):
     filterset_class  = ContactMessageFilter
 
     #if you want partial update just use patch request
+    # why this comment is here, as a code comment and not above as a doc comment?
     def create(self, request):
         serializer = ContactMessageSerializer(data=request.data)
         if serializer.is_valid():
