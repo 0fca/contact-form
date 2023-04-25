@@ -4,6 +4,7 @@ from django.core.validators import MinLengthValidator
 from django.utils.translation import gettext_lazy as _
 
 # Create your models here.
+# Remove the comment above, why is it here?
 class Contact(models.Model):
 
     """
@@ -32,7 +33,7 @@ class Contact(models.Model):
        ('resolved', _('Resolved - action was made')),
    )
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    name = models.CharField(blank=False, max_length=50, validators=[MinLengthValidator(4)])
+    name = models.CharField(blank=False, max_length=50, validators=[MinLengthValidator(4)]) # It does not hurt a database to store more than 50 chars - VARCHAR(MAX) stores up to 2GB :), however it is not a good idea to limit user in case of a length of his or her name.
     email = models.EmailField(max_length=55, blank=False, db_index=True)
     subject = models.CharField(choices=SUBJECT, max_length=15, blank=False)
     message = models.TextField(max_length=500, blank=False)
