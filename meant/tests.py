@@ -76,7 +76,7 @@ class MessageViewSetTest(APITestCase):
         self.message_dummy['email'] = 'emaildomain.com'
         serializer = ContactMessageSerializer(data=self.message_dummy)
         #FIXME: This test does not actually check only whether the email is valid - it calls is_valid on serializer, which uses validate() implementation inside it
-        # this implementation validates more then just email, so it is actually a check if only the email is valid?
+        # this implementation validates more than just email, so is it actually a check if only the email is valid?
         # What's more - the email check is done by internal Django function - there is no apparent reason to check if something what's already tested is working well.
         # This test-case is flawed and kind of useless.
         self.assertFalse(serializer.is_valid())
