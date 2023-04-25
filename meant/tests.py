@@ -29,6 +29,7 @@ class MessageViewSetTest(APITestCase):
             'subject': 'app',
             'message': 'one test please'
         }
+        # Should be contained in some sort of json file to be read from
 
 
     def test_get_messages_admin(self):
