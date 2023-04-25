@@ -66,6 +66,9 @@ class ContactMessageSerializer(serializers.ModelSerializer):
         email = data["email"]
         choice = data["subject"]
 
+        # Isnt it validated in the model itself? If so, why is it double-checked?
+        # Why is there no validation for special characters in this field? 
+        # The same for subject and message. Django prevents from SQL Injections, but we can be never too sure about security ;)
         if (5 > len(name)):
             # Not kind of natural to see an if written in that order - a constant is mostly on the right side of the binary operator such as >,<,= or sth
             raise serializers.ValidationError({"Invalid name": "Name is to short."})
