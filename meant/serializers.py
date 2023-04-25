@@ -67,6 +67,7 @@ class ContactMessageSerializer(serializers.ModelSerializer):
         choice = data["subject"]
 
         if (5 > len(name)):
+            # Not kind of natural to see an if written in that order - a constant is mostly on the right side of the binary operator such as >,<,= or sth
             raise serializers.ValidationError({"Invalid name": "Name is to short."})
         try:
             validate_email(email)
