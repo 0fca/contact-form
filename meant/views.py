@@ -12,6 +12,7 @@ from .serializers import ContactMessageSerializer
 """
 Just to be cohesive we can render it like that like that or in classic CBV
 """
+# TODO: Remove this, YAGNI - Ya Aint Gonna Need It
 # class LandingAPIView(APIView):
 #     renderer_classes = [TemplateHTMLRenderer]
 #     template_name = 'meant/index.html'  
